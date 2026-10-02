@@ -1,0 +1,11 @@
+{%- comment -%}
+  Badge "Produto a Pronta Entrega" — gradiente dourado com brilho animado.
+  Aparece automaticamente quando product.available == true.
+  Params:
+    product (obrigatório)
+{%- endcomment -%}
+{%- if product.available -%}
+<span class="aura-badge-pronta">
+  ✦ Produto a Pronta Entrega
+</span>
+{%- endif -%}

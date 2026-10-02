@@ -1,0 +1,97 @@
+{%- comment -%}
+  Caixa de frete com geolocalização do visitante.
+  - Usa window.auraGeo (do snippet aura-geo-detect) — não refetch
+  - Mostra cidade/UF do visitante + janela estimada de entrega
+  - Quando visitante é da Baixada Santista (SP): destaque verde "Frete GRÁTIS"
+  - Fallback silencioso pra "Brasil todo" se geo falhar
+{%- endcomment -%}
+<div class="aura-shipping aura-shipping--bs-free" data-aura-shipping-bs hidden>
+  <div class="aura-shipping__icon" aria-hidden="true">
+    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="8" width="18" height="4" rx="1"/>
+      <path d="M12 8v13M19 12v7a2 2 0 01-2 2H7a2 2 0 01-2-2v-7"/>
+      <path d="M7.5 8a2.5 2.5 0 010-5C9 3 12 8 12 8M16.5 8a2.5 2.5 0 000-5C15 3 12 8 12 8"/>
+    </svg>
+  </div>
+  <div class="aura-shipping__content">
+    <p class="aura-shipping__line"><strong>🎉 Frete GRÁTIS pro seu CEP!</strong></p>
+    <p class="aura-shipping__line aura-shipping__line--sub">Você é da Baixada Santista — entrega por nossa conta em <span data-aura-shipping-bs-city>Santos</span>.</p>
+  </div>
+</div>
+<div class="aura-shipping" data-aura-shipping>
+  <div class="aura-shipping__icon" aria-hidden="true">
+    <img src="https://cdn.shopify.com/s/files/1/0761/7075/6259/files/correios_png.avif?v=1779862829"
+         alt="Correios" width="40" height="40" loading="lazy" decoding="async"
+         style="width:40px;height:40px;object-fit:contain">
+  </div>
+  <div class="aura-shipping__content">
+    <p class="aura-shipping__line">
+      <strong>Frete Expresso</strong>
+      <span data-aura-shipping-location>para todo o Brasil</span>
+    </p>
+    <p class="aura-shipping__line aura-shipping__line--sub" data-aura-shipping-eta>
+      Entrega em 3 a 8 dias úteis após o despacho.
+    </p>
+  </div>
+</div>
+<div class="aura-shipping aura-shipping--secure">
+  <div class="aura-shipping__icon" aria-hidden="true">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
+  </div>
+  <div class="aura-shipping__content">
+    <p class="aura-shipping__line aura-shipping__line--sub">Seus dados 100% seguros, do início ao fim da sua compra.</p>
+  </div>
+</div>
+<script>
+  (function(){
+    var BS_CITIES = ['santos','sao vicente','cubatao','guaruja','praia grande','mongagua','itanhaem','peruibe','bertioga'];
+    function normalize(s){ return (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').trim(); }
+
+    var box = document.querySelector('[data-aura-shipping]');
+    var bsBox = document.querySelector('[data-aura-shipping-bs]');
+    if (!box || box.dataset.auraInit) return;
+    box.dataset.auraInit = '1';
+    var locEl = box.querySelector('[data-aura-shipping-location]');
+    var etaEl = box.querySelector('[data-aura-shipping-eta]');
+    var bsCityEl = bsBox ? bsBox.querySelector('[data-aura-shipping-bs-city]') : null;
+
+    // Espera o geo global resolver (do snippet aura-geo-detect)
+    var geoPromise = window.auraGeo || Promise.resolve(null);
+    geoPromise.then(function(d){
+      if (!d || (d.country_code && d.country_code !== 'BR')) return;
+      if (!d.city) return;
+      var isBS = (d.region_code === 'SP' && BS_CITIES.indexOf(normalize(d.city)) >= 0);
+      if (isBS) {
+        // Esconde o card normal, mostra o destaque BS
+        box.hidden = true;
+        if (bsBox) {
+          bsBox.hidden = false;
+          if (bsCityEl) bsCityEl.textContent = d.city;
+        }
+        return;
+      }
+      // Cliente fora da BS: card normal com cidade/janela estimada
+      var uf = d.region_code || d.region || '';
+      locEl.textContent = 'para ' + d.city + (uf ? ', ' + uf : '');
+      etaEl.innerHTML = 'Entrega estimada entre <strong>' + range(uf) + '</strong>.';
+    });
+
+    function range(uf){
+      var sudeste = ['SP','RJ','MG','ES'], sul = ['PR','SC','RS'], centro = ['DF','GO','MT','MS'];
+      var nordeste = ['BA','PE','CE','MA','PI','PB','RN','AL','SE'], norte = ['AM','PA','AP','RR','RO','AC','TO'];
+      var min, max;
+      if (sudeste.indexOf(uf)>=0) { min=2; max=4; }
+      else if (sul.indexOf(uf)>=0) { min=3; max=5; }
+      else if (centro.indexOf(uf)>=0) { min=4; max=6; }
+      else if (nordeste.indexOf(uf)>=0) { min=5; max=8; }
+      else if (norte.indexOf(uf)>=0) { min=6; max=10; }
+      else { min=3; max=8; }
+      return fmt(addBusinessDays(new Date(), min)) + ' e ' + fmt(addBusinessDays(new Date(), max));
+    }
+    function addBusinessDays(d, n){ var nd = new Date(d); var c = 0; while(c<n){ nd.setDate(nd.getDate()+1); var w = nd.getDay(); if(w!==0 && w!==6) c++; } return nd; }
+    function fmt(d){
+      var meses = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+      return d.getDate() + ' de ' + meses[d.getMonth()];
+    }
+  })();
+</script>

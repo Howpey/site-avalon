@@ -1,0 +1,132 @@
+{%- liquid
+  assign mf = product.metafields.perfume
+  assign saida = mf.notas_saida.value
+  assign coracao = mf.notas_coracao.value
+  assign fundo = mf.notas_fundo.value
+  assign familia = mf.familia_olfativa.value
+  assign genero = mf.genero.value
+  assign ocasiao = mf.ocasiao.value
+  assign fixacao = mf.fixacao.value
+  assign projecao = mf.projecao.value
+  assign intensidade = mf.intensidade.value
+  assign beneficios = mf.beneficios.value
+
+  assign has_notes = false
+  if saida != blank or coracao != blank or fundo != blank
+    assign has_notes = true
+  endif
+  assign has_perf = false
+  if fixacao != blank or projecao != blank or intensidade != blank or familia != blank or genero != blank or ocasiao != blank
+    assign has_perf = true
+  endif
+  assign has_any = false
+  if has_notes or has_perf or beneficios != blank
+    assign has_any = true
+  endif
+-%}
+
+{%- if has_any -%}
+  {%- style -%}
+    #shopify-section-{{ section.id }} .perfume-profile { padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; }
+    .perfume-profile__grid { display:grid; grid-template-columns:1fr; gap:32px; }
+    @media (min-width:750px){ .perfume-profile__grid--two { grid-template-columns:1fr 1fr; } }
+    .perfume-profile__subtitle { margin:0 0 14px; }
+    .perfume-profile__tier { margin-bottom:14px; }
+    .perfume-profile__tier-label { font-weight:600; display:block; margin-bottom:6px; }
+    .perfume-chip { display:inline-block; border:1px solid rgba(127,127,127,.35); border-radius:999px; padding:3px 12px; margin:0 6px 6px 0; font-size:.9em; }
+    .perfume-bar { margin-bottom:12px; }
+    .perfume-bar__track { height:8px; border-radius:6px; background:rgba(127,127,127,.25); overflow:hidden; margin-top:4px; }
+    .perfume-bar__fill { height:8px; border-radius:6px; background:currentColor; }
+    .perfume-profile__tags { margin-top:16px; }
+    .perfume-profile__benefits { list-style:none; padding:0; margin:24px 0 0; display:grid; gap:8px; }
+    .perfume-profile__benefits li::before { content:"✓"; font-weight:700; margin-right:8px; }
+  {%- endstyle -%}
+
+  <div class="perfume-profile page-width">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="perfume-profile__title {{ section.settings.heading_size }}">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    <div class="perfume-profile__grid{% if has_notes and has_perf %} perfume-profile__grid--two{% endif %}">
+      {%- if has_notes -%}
+        <div class="perfume-profile__notes">
+          <h3 class="perfume-profile__subtitle h5">{{ section.settings.notes_label }}</h3>
+          {%- if saida != blank -%}
+            <div class="perfume-profile__tier"><span class="perfume-profile__tier-label">{{ section.settings.top_label }}</span>
+              {%- for n in saida -%}<span class="perfume-chip">{{ n }}</span>{%- endfor -%}
+            </div>
+          {%- endif -%}
+          {%- if coracao != blank -%}
+            <div class="perfume-profile__tier"><span class="perfume-profile__tier-label">{{ section.settings.heart_label }}</span>
+              {%- for n in coracao -%}<span class="perfume-chip">{{ n }}</span>{%- endfor -%}
+            </div>
+          {%- endif -%}
+          {%- if fundo != blank -%}
+            <div class="perfume-profile__tier"><span class="perfume-profile__tier-label">{{ section.settings.base_label }}</span>
+              {%- for n in fundo -%}<span class="perfume-chip">{{ n }}</span>{%- endfor -%}
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- if has_perf -%}
+        <div class="perfume-profile__performance">
+          <h3 class="perfume-profile__subtitle h5">{{ section.settings.performance_label }}</h3>
+          {%- if fixacao != blank -%}
+            <div class="perfume-bar"><span>{{ section.settings.fixation_label }}</span>
+              <div class="perfume-bar__track"><div class="perfume-bar__fill" style="width: {{ fixacao | times: 20 | at_most: 100 }}%"></div></div>
+            </div>
+          {%- endif -%}
+          {%- if projecao != blank -%}
+            <div class="perfume-bar"><span>{{ section.settings.projection_label }}</span>
+              <div class="perfume-bar__track"><div class="perfume-bar__fill" style="width: {{ projecao | times: 20 | at_most: 100 }}%"></div></div>
+            </div>
+          {%- endif -%}
+          {%- if intensidade != blank -%}
+            <div class="perfume-bar"><span>{{ section.settings.intensity_label }}</span>
+              <div class="perfume-bar__track"><div class="perfume-bar__fill" style="width: {{ intensidade | times: 20 | at_most: 100 }}%"></div></div>
+            </div>
+          {%- endif -%}
+          <div class="perfume-profile__tags">
+            {%- if familia != blank -%}<span class="perfume-chip">{{ familia }}</span>{%- endif -%}
+            {%- if genero != blank -%}<span class="perfume-chip">{{ genero }}</span>{%- endif -%}
+            {%- if ocasiao != blank -%}{%- for o in ocasiao -%}<span class="perfume-chip">{{ o }}</span>{%- endfor -%}{%- endif -%}
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- if beneficios != blank -%}
+      <ul class="perfume-profile__benefits">
+        {%- for b in beneficios -%}<li>{{ b }}</li>{%- endfor -%}
+      </ul>
+    {%- endif -%}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Perfil do perfume",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Título", "default": "Perfil do perfume" },
+    { "type": "select", "id": "heading_size", "label": "Tamanho do título", "default": "title-md", "options": [
+      { "value": "title-sm", "label": "Pequeno" },
+      { "value": "title-md", "label": "Médio" },
+      { "value": "title-lg", "label": "Grande" }
+    ] },
+    { "type": "text", "id": "notes_label", "label": "Rótulo: notas", "default": "Notas olfativas" },
+    { "type": "text", "id": "top_label", "label": "Rótulo: saída", "default": "Notas de saída" },
+    { "type": "text", "id": "heart_label", "label": "Rótulo: coração", "default": "Notas de coração" },
+    { "type": "text", "id": "base_label", "label": "Rótulo: fundo", "default": "Notas de fundo" },
+    { "type": "text", "id": "performance_label", "label": "Rótulo: performance", "default": "Perfil & performance" },
+    { "type": "text", "id": "fixation_label", "label": "Rótulo: fixação", "default": "Fixação" },
+    { "type": "text", "id": "projection_label", "label": "Rótulo: projeção", "default": "Projeção" },
+    { "type": "text", "id": "intensity_label", "label": "Rótulo: intensidade", "default": "Intensidade" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Espaço acima", "default": 48 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Espaço abaixo", "default": 48 }
+  ],
+  "presets": [ { "name": "Perfil do perfume" } ]
+}
+{% endschema %}

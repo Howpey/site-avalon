@@ -1,0 +1,24 @@
+{%- comment -%}
+  Pix price badge — preço com desconto Pix (gold)
+  Params:
+    product (obrigatório)
+    discount_pct (opcional, default 5)
+    size (opcional, "sm" | "md", default "md")
+{%- endcomment -%}
+{%- liquid
+  assign d = discount_pct | default: 5
+  assign multiplier = 100 | minus: d
+  assign pix_cents = product.price | times: multiplier | divided_by: 100
+-%}
+{%- if product.price > 0 -%}
+<span class="aura-pix aura-pix--{{ size | default: 'md' }}" title="Preço com desconto via Pix">
+  {%- comment -%} Logo Pix oficial: 4 quadrantes formando o "X" característico em branco {%- endcomment -%}
+  <svg class="aura-pix__icon" width="14" height="14" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true">
+    <path d="M22.2 22.2c-1.1 0-2.2-.4-3-1.3l-4.4-4.4c-.3-.3-.9-.3-1.2 0l-4.4 4.4c-.8.8-2 1.3-3 1.3H4.7l5.6 5.6c1.8 1.8 4.6 1.8 6.3 0l5.6-5.6h-.0z"/>
+    <path d="M6.2 9.7c1.1 0 2.2.4 3 1.3l4.4 4.4c.3.3.9.3 1.2 0l4.4-4.4c.8-.8 2-1.3 3-1.3h.7L17.4 4.1c-1.8-1.8-4.6-1.8-6.3 0L5.5 9.7h.7z"/>
+    <path d="M27.3 12.8L23.9 9.4c-.1 0-.2.1-.3.1h-1.4c-.8 0-1.5.3-2.1.9l-4.4 4.4c-.4.4-.9.6-1.4.6s-1-.2-1.4-.6L8.5 10.4c-.6-.6-1.3-.9-2.1-.9H4.7c-.1 0-.2 0-.3-.1L1.1 12.8c-1.8 1.8-1.8 4.6 0 6.3l3.3 3.3c.1 0 .2-.1.3-.1h1.7c.8 0 1.5-.3 2.1-.9l4.4-4.4c.8-.8 2.1-.8 2.9 0l4.4 4.4c.6.6 1.3.9 2.1.9h1.4c.1 0 .2 0 .3.1l3.3-3.3c1.8-1.8 1.8-4.6 0-6.3z"/>
+  </svg>
+  <strong>{{ pix_cents | money }}</strong>
+  <span class="aura-pix__label">no pix</span>
+</span>
+{%- endif -%}

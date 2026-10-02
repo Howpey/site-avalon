@@ -1,0 +1,57 @@
+{%- comment -%}
+  4 acordeões da página de produto: Descrição, Qualidade, Trocas, Prazos.
+  Usa <details>/<summary> nativos: acessível por teclado e sem JS.
+  Params:
+    product (obrigatório)
+{%- endcomment -%}
+<div class="aura-acc">
+  {%- if product.description != blank -%}
+  <details class="aura-acc__item" open>
+    <summary class="aura-acc__head">
+      <span>Descrição</span>
+      <svg class="aura-acc__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+    </summary>
+    <div class="aura-acc__body rte">{{ product.description }}</div>
+  </details>
+  {%- endif -%}
+
+  <details class="aura-acc__item">
+    <summary class="aura-acc__head">
+      <span>Qualidade do Produto</span>
+      <svg class="aura-acc__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+    </summary>
+    <div class="aura-acc__body">
+      <p>Todos os perfumes são <strong>originais</strong>, importados diretamente e armazenados em condições ideais (longe de luz e calor). Frascos lacrados de fábrica, com selo de procedência da marca.</p>
+      <p>Decants são fracionados em ambiente controlado, em frascos próprios pra perfumaria (vidro com atomizador) e etiquetados com nome da fragrância e volume.</p>
+    </div>
+  </details>
+
+  <details class="aura-acc__item">
+    <summary class="aura-acc__head">
+      <span>Trocas e devoluções</span>
+      <svg class="aura-acc__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+    </summary>
+    <div class="aura-acc__body">
+      <p>Você tem <strong>7 dias após o recebimento</strong> pra solicitar troca ou devolução, conforme Art. 49 do Código de Defesa do Consumidor.</p>
+      <p>Pra ser aceito, o produto deve estar <strong>lacrado</strong>, sem uso aparente, e na embalagem original. Pra iniciar, fale com a gente pelo <a href="/pages/contato">contato</a> ou WhatsApp — orientamos o passo a passo.</p>
+    </div>
+  </details>
+
+  <details class="aura-acc__item">
+    <summary class="aura-acc__head">
+      <span>Prazos de entrega</span>
+      <svg class="aura-acc__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+    </summary>
+    <div class="aura-acc__body">
+      <p>Despachamos em até <strong>1 dia útil</strong> após a confirmação do pagamento. O prazo total varia por região:</p>
+      <ul>
+        <li><strong>Sudeste</strong> (SP, RJ, MG, ES): 2 a 4 dias úteis</li>
+        <li><strong>Sul</strong> (PR, SC, RS): 3 a 5 dias úteis</li>
+        <li><strong>Centro-Oeste</strong> (DF, GO, MT, MS): 4 a 6 dias úteis</li>
+        <li><strong>Nordeste</strong>: 5 a 8 dias úteis</li>
+        <li><strong>Norte</strong>: 6 a 10 dias úteis</li>
+      </ul>
+      <p>O prazo exato do seu CEP aparece no checkout, calculado em tempo real pelos Correios.</p>
+    </div>
+  </details>
+</div>

@@ -1,0 +1,627 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main-product": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.vendor }}",
+            "text_size": "text-base"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "title_size": "product-title-md",
+            "title_size_mobile": "product-title-md",
+            "show_price": false,
+            "show_rating": false
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "show_taxes_notice": false
+          }
+        },
+        "judgeme_badge": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "<div class=\"jdgm-widget jdgm-preview-badge\" data-id=\"{{ product.id }}\" style=\"margin:6px 0 0\"></div>"
+          }
+        },
+        "pix_price": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "<div style=\"display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:8px 0 0\">{% render 'price-pix', product: product, size: 'md' %}{% render 'badge-envio-rapido' %}</div>"
+          }
+        },
+        "installments": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "{%- if product.price and product.price > 0 -%}<p class=\"product__installments text-sm\" style=\"margin:6px 0 0;opacity:.85\">ou em até <strong>2x de {{ product.price | divided_by: 2 | money }}</strong> sem juros</p>{%- endif -%}"
+          }
+        },
+        "cashback": {
+          "type": "liquid",
+          "disabled": true,
+          "settings": {
+            "liquid": "{% render 'price-cashback', product: product, cashback_pct: 5 %}"
+          }
+        },
+        "pronta_entrega": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "<div style=\"margin:14px 0 0\">{% render 'badge-pronta-entrega', product: product %}</div>"
+          }
+        },
+        "shipping_geo": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "{% render 'shipping-geo' %}"
+          }
+        },
+        "accordions": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "{% render 'product-accordions', product: product %}"
+          }
+        },
+        "description": {
+          "type": "description",
+          "disabled": true,
+          "settings": {
+            "text_size": "text-base"
+          }
+        },
+        "resumo": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "{%- if product.metafields.perfume.resumo.value != blank -%}<p class=\"product__text rte subtext-md\">{{ product.metafields.perfume.resumo.value }}</p>{%- endif -%}"
+          }
+        },
+        "countdown": {
+          "type": "countdown",
+          "settings": {
+            "heading": "Corra!",
+            "subheading": "A promoção termina em:",
+            "color_text": "#e11d48",
+            "color_background": "#fff1f2",
+            "gradient_background": ""
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "show_variant_labels": true,
+            "picker_type": "button",
+            "enable_color_swatches": true,
+            "color_swatch_type": "color",
+            "size_chart": ""
+          }
+        },
+        "inventory": {
+          "type": "inventory",
+          "disabled": true,
+          "settings": {
+            "inventory_threshold": 15,
+            "show_inventory_transfer": true,
+            "color_scheme": "accent-1"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_quantity_selector": true,
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": true
+          }
+        },
+        "mini_trust": {
+          "type": "liquid",
+          "disabled": true,
+          "settings": {
+            "liquid": "<ul class=\"product-mini-trust\" style=\"list-style:none;display:flex;flex-wrap:wrap;gap:14px;padding:0;margin:12px 0;font-size:.85em;opacity:.85\"><li>✓ Compra segura</li><li>✓ Pronta entrega</li><li>✓ Troca fácil</li></ul>{%- if shop.enabled_payment_types != empty -%}<ul class=\"payment-icons payment-icons--gray\" style=\"display:flex;flex-wrap:wrap;gap:8px;padding:0;margin:8px 0 0;list-style:none\">{%- for type in shop.enabled_payment_types -%}<li>{{ type | payment_type_svg_tag }}</li>{%- endfor -%}</ul>{%- endif -%}"
+          }
+        },
+        "pickup_availability": {
+          "type": "pickup_availability",
+          "settings": {}
+        },
+        "share": {
+          "type": "share",
+          "disabled": true,
+          "settings": {
+            "share_label": "Compartilhar",
+            "show_help_desk": true,
+            "help_label": "Precisa de ajuda?",
+            "help_type": "drawer",
+            "help_page": ""
+          }
+        },
+        "complementary": {
+          "type": "complementary",
+          "settings": {
+            "heading": "Combina bem com",
+            "product_limit": 4,
+            "show_vendor": false,
+            "show_price": true
+          }
+        },
+        "sticky_buy_button": {
+          "type": "sticky_buy_button",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "judgeme_badge",
+        "pix_price",
+        "price",
+        "installments",
+        "cashback",
+        "pronta_entrega",
+        "variant_picker",
+        "inventory",
+        "buy_buttons",
+        "shipping_geo",
+        "accordions",
+        "resumo",
+        "countdown",
+        "description",
+        "mini_trust",
+        "pickup_availability",
+        "share",
+        "complementary",
+        "sticky_buy_button"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "media_size": 35,
+        "gallery_layout": "scroll",
+        "thumbnail_position": "beside",
+        "image_ratio": "square",
+        "image_zoom": "lightbox",
+        "hide_variants": false,
+        "enable_video_autoplay": true,
+        "enable_video_looping": true,
+        "mobile_layout": "full_width",
+        "image_ratio_mobile": "adapt_first",
+        "mobile_thumbnail": false,
+        "padding_top": 24,
+        "padding_bottom": 56,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "help-drawer": {
+      "type": "help-drawer",
+      "blocks": {
+        "content-1": {
+          "type": "content",
+          "settings": {
+            "icon": "rocket",
+            "heading": "Informações de envio",
+            "text": "<p>Use este texto para responder às dúvidas dos seus clientes com o máximo de detalhes possível.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "color_text": "#b45309",
+            "color_background": "#fffbeb",
+            "gradient_background": "",
+            "color_highlight": "#ffddbf",
+            "gradient_highlight": ""
+          }
+        },
+        "content-2": {
+          "type": "content",
+          "settings": {
+            "icon": "headphone",
+            "heading": "Suporte ao cliente",
+            "text": "<p>Use este texto para responder às dúvidas dos seus clientes com o máximo de detalhes possível.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "color_text": "#0369a1",
+            "color_background": "#f0f9ff",
+            "gradient_background": "",
+            "color_highlight": "#ffddbf",
+            "gradient_highlight": ""
+          }
+        },
+        "content-3": {
+          "type": "content",
+          "settings": {
+            "icon": "chat_bubble",
+            "heading": "FAQ’s",
+            "text": "<p>Use este texto para responder às dúvidas dos seus clientes com o máximo de detalhes possível.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "color_text": "#be123c",
+            "color_background": "#fff1f2",
+            "gradient_background": "",
+            "color_highlight": "#ffddbf",
+            "gradient_highlight": ""
+          }
+        },
+        "content-4": {
+          "type": "content",
+          "settings": {
+            "icon": "phone",
+            "heading": "Fale conosco",
+            "text": "<p>Use este texto para responder às dúvidas dos seus clientes com o máximo de detalhes possível.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "color_text": "#4d7c0f",
+            "color_background": "#f7fee7",
+            "gradient_background": "",
+            "color_highlight": "#ffddbf",
+            "gradient_highlight": ""
+          }
+        }
+      },
+      "block_order": [
+        "content-1",
+        "content-2",
+        "content-3",
+        "content-4"
+      ],
+      "settings": {
+        "heading": "Precisa de ajuda?",
+        "description": "<p>Se tiver qualquer dúvida, fique à vontade para entrar em contato. Responderemos o mais rápido possível, em até 24 horas nos dias úteis.</p>"
+      }
+    },
+    "perfume-profile": {
+      "type": "perfume-profile",
+      "settings": {
+        "heading": "Perfil do perfume",
+        "heading_size": "title-md",
+        "notes_label": "Notas olfativas",
+        "top_label": "Notas de saída",
+        "heart_label": "Notas de coração",
+        "base_label": "Notas de fundo",
+        "performance_label": "Perfil & performance",
+        "fixation_label": "Fixação",
+        "projection_label": "Projeção",
+        "intensity_label": "Intensidade",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "product-guarantees": {
+      "type": "multicolumn-with-icons",
+      "blocks": {
+        "g1": {
+          "type": "column",
+          "settings": {
+            "icon": "shield",
+            "custom_icon": "",
+            "heading": "Compra segura",
+            "text": "<p>Pagamento 100% protegido.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "g2": {
+          "type": "column",
+          "settings": {
+            "icon": "box",
+            "custom_icon": "",
+            "heading": "Pronta entrega",
+            "text": "<p>Despachamos em até 1 dia útil para todo o Brasil.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "g3": {
+          "type": "column",
+          "settings": {
+            "icon": "support",
+            "custom_icon": "",
+            "heading": "Atendimento",
+            "text": "<p>Tire dúvidas pelo WhatsApp.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "g4": {
+          "type": "column",
+          "settings": {
+            "icon": "users",
+            "custom_icon": "",
+            "heading": "Transparência",
+            "text": "<p>Informamos claramente original ou inspiração.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "g1",
+        "g2",
+        "g3",
+        "g4"
+      ],
+      "settings": {
+        "columns": 4,
+        "text_alignment": "left",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-center md:items-center",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "divider": true,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "product_limit": 10,
+        "columns": 5,
+        "carousel_on_desktop": true,
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "heading": "Você também pode gostar",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 56,
+        "padding_bottom": 56,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "google_reviews_card": {
+      "type": "custom-liquid",
+      "settings": {
+        "liquid": "<div style=\"max-width:1200px;margin:0 auto;padding:0 16px\"><div class=\"aura-google-reviews\"><div class=\"aura-google-reviews__brand\"><div class=\"aura-google-reviews__avatar\">A</div><div><p class=\"aura-google-reviews__title\">Avalon Parfum</p><span class=\"aura-google-reviews__rating\">★★★★★ Em construção</span><div class=\"aura-google-reviews__count\">Conectaremos as avaliações do Google em breve</div></div></div><a class=\"aura-google-reviews__cta\" href=\"https://g.page/r/avalon-parfum/review\" target=\"_blank\" rel=\"noopener\">Deixe um comentário</a></div></div>",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 12,
+        "padding_bottom": 12,
+        "divider": false,
+        "narrow": false,
+        "rounded": false
+      }
+    },
+    "judgeme_reviews": {
+      "type": "custom-liquid",
+      "settings": {
+        "liquid": "<div style=\"max-width:1200px;margin:0 auto;padding:48px 16px\"><h2 style=\"font-size:1.75rem;font-weight:600;margin:0 0 24px;letter-spacing:-.01em\">Avaliações de clientes</h2><div class=\"jdgm-widget jdgm-review-widget\" data-id=\"{{ product.id }}\" data-auto-install=\"false\"></div></div>",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 24,
+        "padding_bottom": 24,
+        "divider": false,
+        "narrow": false,
+        "rounded": false
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "title": "Frequently asked question",
+            "text": "<p>Informamos claramente em cada produto se é original lacrado ou inspiração/contratipo de alta qualidade.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "title": "Frequently asked question",
+            "text": "<p>A fixação varia por fragrância — veja a barra de “Fixação” no perfil do produto.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "title": "Frequently asked question",
+            "text": "<p>Frascos originais vêm lacrados. Decantes são envasados com higiene e identificados.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "title": "Frequently asked question",
+            "text": "<p>Despacho em até 1 dia útil; o prazo de entrega aparece no cálculo de frete.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "q5": {
+          "type": "question",
+          "settings": {
+            "title": "Frequently asked question",
+            "text": "<p>Sim, conforme nossa política de trocas e o Código de Defesa do Consumidor.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "q6": {
+          "type": "question",
+          "settings": {
+            "title": "Frequently asked question",
+            "text": "<p>Sim! Ótima opção de presente. Fale conosco se quiser embalagem especial.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "contact": {
+          "type": "contact",
+          "settings": {
+            "heading": "Didn’t find your answer?",
+            "text": "<p>Não hesite em entrar em contato conosco</p>",
+            "show_phone": false,
+            "avatar_height": 60,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6",
+        "contact"
+      ],
+      "disabled": true,
+      "settings": {
+        "style": "with-background",
+        "heading": "FAQs",
+        "heading_size": "title-lg tracking-heading",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "<p>Leia nossa página de <a href=\"#\" title=\"FAQ\">Perguntas frequentes</a> para saber mais.</p>",
+        "button_label": "",
+        "button_link": "",
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "#ffffff",
+        "color_background": "#171717",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "#171717",
+        "color_button_background": "#ffffff",
+        "color_button_gradient": "",
+        "padding_top": 84,
+        "padding_bottom": 84,
+        "divider": false,
+        "narrow": false,
+        "rounded": false
+      }
+    },
+    "recently-viewed": {
+      "type": "recently-viewed",
+      "disabled": true,
+      "settings": {
+        "product_limit": 6,
+        "columns": 5,
+        "carousel_on_desktop": true,
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "heading": "Vistos recentemente",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 56,
+        "padding_bottom": 56,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "1779856260aa7bc390": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_preview_badge_VLnfFg": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_preview_badge_VLnfFg"
+      ],
+      "settings": {
+        "enable_reviews_integration": true,
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    }
+  },
+  "order": [
+    "main-product",
+    "help-drawer",
+    "perfume-profile",
+    "product-guarantees",
+    "product-recommendations",
+    "google_reviews_card",
+    "judgeme_reviews",
+    "faq",
+    "recently-viewed",
+    "1779856260aa7bc390"
+  ]
+}

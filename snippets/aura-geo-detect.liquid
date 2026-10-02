@@ -1,0 +1,38 @@
+{%- comment -%}
+  Detecção global de região do visitante.
+
+  - Fetcha ipapi.co uma vez por sessão (cache em sessionStorage)
+  - Adiciona class="aura-region-bs" em <html> se o visitante for da
+    Baixada Santista (SP)
+  - Expõe window.auraGeo (Promise) pra outros componentes consumirem
+
+  Outros componentes que reagem:
+  - shipping-geo.liquid (página de produto)
+  - product-card.liquid (badge "Frete grátis pra você")
+{%- endcomment -%}
+<script>
+  (function(){
+    if (window.auraGeo) return;
+    var BS_CITIES = ['santos','sao vicente','cubatao','guaruja','praia grande','mongagua','itanhaem','peruibe','bertioga'];
+    function normalize(s){ return (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').trim(); }
+    function applyClass(d){
+      if (!d || !d.city) return;
+      if (d.country_code === 'BR' && d.region_code === 'SP' && BS_CITIES.indexOf(normalize(d.city)) >= 0) {
+        document.documentElement.classList.add('aura-region-bs');
+      }
+    }
+    window.auraGeo = new Promise(function(resolve){
+      try {
+        var cached = JSON.parse(sessionStorage.getItem('aura_geo') || 'null');
+        if (cached && cached.city) { applyClass(cached); resolve(cached); return; }
+      } catch(e){}
+      fetch('https://ipapi.co/json/').then(function(r){ return r.ok ? r.json() : null; }).then(function(d){
+        if (d && d.city) {
+          try { sessionStorage.setItem('aura_geo', JSON.stringify(d)); } catch(e){}
+          applyClass(d);
+          resolve(d);
+        } else { resolve(null); }
+      }).catch(function(){ resolve(null); });
+    });
+  })();
+</script>

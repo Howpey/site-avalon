@@ -1,0 +1,53 @@
+{%- comment -%}
+  Ajustes da Avalon, carregados depois do aura-styles.
+
+  1. Badge "Frete gratis pra voce" menor no card de produto.
+
+  2. Correcao do carrossel de recomendacoes.
+     O <slider-element> usa grid-auto-flow: column, mas a classe .card-grid
+     mantem colunas explicitas em 1fr. Sob fluxo em coluna essas colunas
+     colapsam para 0px e os primeiros cards ficam empilhados uns sobre os
+     outros (visivel em "Voce tambem pode gostar" acima de ~1280px).
+     Nao da para corrigir por CSS: a declaracao original vence !important
+     mesmo com especificidade maxima. Por isso e por estilo inline, e so
+     quando o grid esta de fato em modo carrossel - assim mobile e tablet,
+     onde nao ha bug, ficam intocados.
+
+     Usa setTimeout e nao requestAnimationFrame: rAF fica suspenso em aba
+     em segundo plano, e a pagina pode ser aberta assim.
+{%- endcomment -%}
+<style>
+  .aura-local-badge {
+    margin-top: 3px;
+    padding: 2px 7px;
+    font-size: 0.6rem;
+  }
+</style>
+<script>
+  (function(){
+    var agendado = false;
+    function corrigir(){
+      agendado = false;
+      var grids = document.querySelectorAll('slider-element .card-grid');
+      for (var i = 0; i < grids.length; i++) {
+        var g = grids[i];
+        if (getComputedStyle(g).gridAutoFlow.indexOf('column') === -1) {
+          g.style.removeProperty('grid-template-columns');
+        } else {
+          g.style.setProperty('grid-template-columns', 'none', 'important');
+        }
+      }
+    }
+    function agendar(){
+      if (agendado) return;
+      agendado = true;
+      setTimeout(corrigir, 0);
+    }
+    agendar();
+    document.addEventListener('DOMContentLoaded', agendar);
+    window.addEventListener('load', agendar);
+    window.addEventListener('resize', agendar);
+    document.addEventListener('visibilitychange', agendar);
+    new MutationObserver(agendar).observe(document.documentElement, { childList: true, subtree: true });
+  })();
+</script>

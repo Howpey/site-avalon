@@ -1,0 +1,459 @@
+{%- comment -%}
+  Estilos extras da Avalon Parfum — Pix, cashback, badges, cards refinados.
+  Incluído via {% render 'aura-styles' %} no css-variables.liquid (head global).
+{%- endcomment -%}
+<style>
+  /* === Pix price badge === */
+  .aura-pix {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    background: linear-gradient(135deg, #c9a36a 0%, #b8925a 100%);
+    color: #fff;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    line-height: 1;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .aura-pix--sm { font-size: 0.72rem; padding: 3px 8px; gap: 4px; }
+  .aura-pix__icon { flex: 0 0 auto; }
+  .aura-pix strong { font-weight: 700; letter-spacing: -.01em; }
+  .aura-pix__label { opacity: .9; font-weight: 400; }
+
+  /* === Cashback line === */
+  .aura-cashback {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 8px 0 0;
+    font-size: 0.875rem;
+    color: #525252;
+    line-height: 1.3;
+  }
+  .aura-cashback__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    background: #c9a36a;
+    color: #fff;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    flex: 0 0 auto;
+  }
+  .aura-cashback strong { color: #171717; font-weight: 600; }
+
+  /* === Pronta Entrega badge === */
+  .aura-badge-pronta {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: linear-gradient(90deg, #fdf6e9 0%, #faecd1 50%, #fdf6e9 100%);
+    background-size: 200% 100%;
+    color: #856200;
+    border: 1px solid #e6c98a;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    overflow: hidden;
+    animation: aura-shine 3s linear infinite;
+  }
+  @keyframes aura-shine {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  /* === Envio Rápido badge === */
+  .aura-badge-envio {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    background: #ecfdf5;
+    color: #166534;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  /* === Discount badge (canto do card) === */
+  .aura-discount-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 2;
+    padding: 4px 10px;
+    background: #c9a36a;
+    color: #fff;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: -.01em;
+  }
+
+  /* === Card pricing — melhor disposição === */
+  .product-card__price-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    width: 100%;
+  }
+  .product-card__pix {
+    display: block;
+    margin-top: 4px;
+  }
+  .product-card__installments-mini {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.72rem;
+    color: #525252;
+    line-height: 1.2;
+  }
+  .product-card__installments-mini svg { opacity: .6; flex: 0 0 auto; }
+
+  /* === Google Reviews placeholder === */
+  .aura-google-reviews {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 18px 24px;
+    background: #f5f5f4;
+    border-radius: 16px;
+    margin: 24px 0;
+    flex-wrap: wrap;
+  }
+  .aura-google-reviews__brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .aura-google-reviews__avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #c9a36a, #b8925a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.2rem;
+    flex: 0 0 auto;
+  }
+  .aura-google-reviews__title {
+    font-weight: 600;
+    color: #171717;
+    line-height: 1.2;
+    margin: 0;
+  }
+  .aura-google-reviews__rating {
+    color: #c9a36a;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 2px;
+  }
+  .aura-google-reviews__count {
+    color: #525252;
+    font-size: 0.85rem;
+    margin-top: 2px;
+  }
+  .aura-google-reviews__cta {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    background: #fff;
+    color: #171717;
+    border: 1px solid #e5e5e5;
+    border-radius: 999px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: border-color .15s;
+  }
+  .aura-google-reviews__cta:hover { border-color: #c9a36a; }
+
+  /* =========================================================
+     COMPACTAÇÃO GLOBAL — densidade próxima ao Xo Gang Brazil
+     Tudo escopo desktop (lg+). Mobile mantém o layout do tema.
+     ========================================================= */
+  @media (min-width: 1024px) {
+    /* --- Header / menu --- */
+    .header { padding-top: 12px; padding-bottom: 12px; }
+    .header__nav,
+    .header__menu-list,
+    .header [is="header-menu"] {
+      font-size: 0.875rem !important;
+      gap: 1.25rem !important;
+    }
+    .header__nav a,
+    .header__menu-list a {
+      font-size: 0.875rem !important;
+      padding: 6px 10px !important;
+      letter-spacing: 0;
+    }
+
+    /* --- Títulos de seção: menos exagerados --- */
+    .section-heading h1,
+    .section-heading h2,
+    .section h1.title-xl,
+    .section h2.title-xl,
+    h1.title-xl, h2.title-xl,
+    .title-xl {
+      font-size: 2rem !important;
+      line-height: 1.1 !important;
+      letter-spacing: -0.015em;
+    }
+    h2.title-lg, .title-lg {
+      font-size: 1.625rem !important;
+      line-height: 1.15 !important;
+    }
+    h2.title-md, .title-md {
+      font-size: 1.375rem !important;
+      line-height: 1.2 !important;
+    }
+
+    /* --- Página de produto: imagem menor, info mais espaço --- */
+    .main-product__media,
+    .product__media-list,
+    .product__media-gallery,
+    .product__media-container,
+    #SliderGallery {
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    .product__media,
+    .product__media img,
+    .product__media-item img {
+      max-height: 480px;
+      width: 100%;
+      object-fit: contain;
+    }
+    .featured-product.product {
+      gap: 2.5rem !important;
+    }
+    /* Título do produto mais comportado */
+    .product__title h1,
+    .product-title-md,
+    .product-title-lg {
+      font-size: 1.5rem !important;
+      line-height: 1.2 !important;
+      letter-spacing: -0.01em;
+      margin-bottom: 0 !important;
+    }
+
+    /* --- Aperta o espaçamento vertical entre blocos da info do produto --- */
+    .product__info > * {
+      margin-bottom: 8px !important;
+      margin-top: 0 !important;
+    }
+    .product__info > *:last-child { margin-bottom: 0 !important; }
+    .product__info .product__title { margin-bottom: 10px !important; }
+    .product__info .product__price { margin: 4px 0 !important; }
+    .product__info .product__price .price__current,
+    .product__info .product__price .money {
+      font-size: 1.5rem !important;
+      font-weight: 700 !important;
+      line-height: 1.1 !important;
+    }
+    .product__info .product__price .price__compare,
+    .product__info .product__price s {
+      font-size: 0.95rem !important;
+      color: #a3a3a3 !important;
+    }
+    .product__info .installment {
+      margin: 4px 0 !important;
+      font-size: 0.85rem !important;
+    }
+    /* Esconde o aviso de imposto incluído onde quer que apareça */
+    .product__tax,
+    .product__info .product__tax { display: none !important; }
+
+    /* --- Cards de coleção / featured / recommendations --- */
+    .card-grid > .card .media,
+    .card-grid > .card .product-card__media {
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+    }
+    .card-grid > .card .media img,
+    .card-grid > .card .product-card__media img {
+      object-fit: contain !important;
+      width: 100% !important;
+      height: 100% !important;
+    }
+    .product-card__title {
+      font-size: 0.9rem !important;
+      line-height: 1.25 !important;
+      font-weight: 500;
+    }
+
+    /* --- Padding das seções: cortar excessos --- */
+    .section--padding {
+      --section-padding-top: 40px;
+      --section-padding-bottom: 40px;
+    }
+  }
+
+  /* === Frete com geolocalização === */
+  .aura-shipping {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 18px;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    margin: 14px 0 0;
+    background: #fff;
+  }
+  .aura-shipping--secure {
+    margin-top: 8px;
+    background: #fafafa;
+    border-color: #f0efef;
+  }
+  /* === Card especial pra Baixada Santista === */
+  .aura-shipping--bs-free {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    border: 1px solid #86efac;
+    box-shadow: 0 2px 8px rgba(22, 163, 74, 0.08);
+  }
+  .aura-shipping--bs-free .aura-shipping__line strong {
+    color: #15803d;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  .aura-shipping--bs-free .aura-shipping__line--sub {
+    color: #166534;
+  }
+
+  /* === Badge "Local — Frete grátis pra você" no card de produto === */
+  .aura-local-badge {
+    display: none;
+    margin-top: 4px;
+    padding: 3px 8px;
+    background: #dcfce7;
+    color: #15803d;
+    font-size: 0.7rem;
+    font-weight: 600;
+    border-radius: 999px;
+    border: 1px solid #86efac;
+    line-height: 1.3;
+    width: fit-content;
+  }
+  .aura-region-bs .aura-local-badge { display: inline-flex; }
+  .aura-shipping__icon { flex: 0 0 auto; line-height: 0; padding-top: 2px; }
+  .aura-shipping__content { flex: 1; min-width: 0; }
+  .aura-shipping__line {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.35;
+    color: #171717;
+  }
+  .aura-shipping__line strong { font-weight: 600; }
+  .aura-shipping__line--sub {
+    margin-top: 2px;
+    color: #525252;
+    font-size: 0.85rem;
+  }
+
+  /* === FIX hover dos botões ===
+     O CSS original gateia a inversão de cor no hover por [data-button_hover=standard].
+     Como settings.buttons_hover está vazio, o atributo vira "" e o seletor nunca casa.
+     Resultado anterior: fill branco subia, texto continuava branco = botão todo branco.
+     Esses overrides forçam a inversão independente do valor do data-button_hover. */
+  @media (pointer: fine) {
+    .js .button--primary:hover:not([disabled], .self-button) .btn-text,
+    .js .button--primary:hover:not([disabled], .self-button) {
+      color: rgb(var(--color-button-background)) !important;
+    }
+    .js .button--secondary:hover:not([disabled], .self-button) .btn-text,
+    .js .button--secondary:hover:not([disabled], .self-button),
+    .js button.shopify-payment-button__button--unbranded:hover:not([disabled]) .btn-text {
+      color: rgb(var(--color-button-text)) !important;
+    }
+    /* Garante que o fill apareça mesmo sem data-button_hover=standard */
+    .js .button:not([disabled]) .btn-fill {
+      display: block;
+    }
+  }
+
+  /* === Acordeões da página de produto === */
+  .aura-acc { margin: 16px 0 0; border-top: 1px solid #e5e7eb; }
+  .aura-acc__item {
+    border-bottom: 1px solid #e5e7eb;
+  }
+  .aura-acc__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 4px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 1rem;
+    color: #171717;
+    list-style: none;
+    user-select: none;
+    transition: color .15s;
+  }
+  .aura-acc__head::-webkit-details-marker { display: none; }
+  .aura-acc__head:hover { color: #c9a36a; }
+  .aura-acc__arrow {
+    transition: transform .2s ease;
+    flex: 0 0 auto;
+    color: #525252;
+  }
+  .aura-acc__item[open] .aura-acc__arrow { transform: rotate(180deg); color: #c9a36a; }
+  .aura-acc__body {
+    padding: 0 4px 18px;
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: #525252;
+  }
+  .aura-acc__body p { margin: 0 0 10px; font-size: 0.88rem; line-height: 1.55; }
+  .aura-acc__body p:last-child { margin-bottom: 0; }
+  .aura-acc__body ul { margin: 0 0 10px; padding-left: 20px; }
+  .aura-acc__body ul li { margin: 4px 0; font-size: 0.88rem; }
+  .aura-acc__body strong { color: #171717; font-weight: 600; }
+  .aura-acc__body em { color: #525252; font-style: italic; }
+  .aura-acc__body a { color: #c9a36a; text-decoration: underline; }
+
+  /* Cap nos headings DENTRO da rte (descrição do produto) — antes vinham gigantes */
+  .aura-acc__body.rte h1,
+  .aura-acc__body.rte h2,
+  .aura-acc__body.rte h3,
+  .aura-acc__body.rte h4,
+  .aura-acc__body.rte h5,
+  .aura-acc__body.rte h6,
+  .aura-acc__body .produto-descricao h1,
+  .aura-acc__body .produto-descricao h2,
+  .aura-acc__body .produto-descricao h3 {
+    font-size: 1rem !important;
+    line-height: 1.3 !important;
+    font-weight: 600 !important;
+    color: #171717 !important;
+    margin: 14px 0 6px !important;
+    letter-spacing: 0 !important;
+  }
+  .aura-acc__body.rte h2,
+  .aura-acc__body .produto-descricao h2 {
+    font-size: 1.05rem !important;
+  }
+  .aura-acc__body.rte img,
+  .aura-acc__body .produto-descricao img {
+    max-width: 100%;
+    height: auto;
+    margin: 10px 0;
+    border-radius: 8px;
+  }
+</style>

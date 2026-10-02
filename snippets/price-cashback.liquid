@@ -1,0 +1,16 @@
+{%- comment -%}
+  Cashback line — valor que o cliente recebe de volta
+  Params:
+    product (obrigatório)
+    cashback_pct (opcional, default 5)
+{%- endcomment -%}
+{%- liquid
+  assign pct = cashback_pct | default: 5
+  assign cashback_value = product.price | times: pct | divided_by: 100
+-%}
+{%- if product.price > 0 -%}
+<p class="aura-cashback">
+  <span class="aura-cashback__icon" aria-hidden="true">$</span>
+  <span>Receba de volta <strong>{{ cashback_value | money }}</strong> em cashback</span>
+</p>
+{%- endif -%}

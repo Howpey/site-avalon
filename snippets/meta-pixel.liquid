@@ -1,0 +1,20 @@
+{%- comment -%}
+  Meta Pixel — Avalon Parfum
+  Pixel ID: 1021030166620463
+
+  Arquitetura:
+  - Customer Events Custom Pixel (Admin → Settings → Customer events)
+    dispara TODOS os eventos com event_id para deduplicação com CAPI.
+  - Aqui o tema só renderiza:
+    1) <noscript> fallback (img pixel) pra usuários sem JS
+    2) Preconnect pro CDN do FB pra acelerar o load do Customer Events
+
+  NÃO adicionar fbq() init aqui — duplicaria eventos.
+{%- endcomment -%}
+<link rel="preconnect" href="https://connect.facebook.net" crossorigin>
+<link rel="preconnect" href="https://www.facebook.com" crossorigin>
+<noscript>
+  <img height="1" width="1" style="display:none"
+       src="https://www.facebook.com/tr?id=1021030166620463&ev=PageView&noscript=1"
+       alt=""/>
+</noscript>

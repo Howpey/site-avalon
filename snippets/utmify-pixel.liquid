@@ -1,0 +1,24 @@
+{%- comment -%}
+  Utmify Pixel — Avalon Parfum
+  Pixel ID: 6a230fe71c778d01f58ab301
+
+  Função:
+  - Captura UTMs da URL e persiste em cookies/localStorage
+  - Atribui conversões corretamente entre canais (Meta, Google, TikTok)
+  - Envia eventos pro Meta Pixel via Conversions API (server-side)
+    porque o pixel do Meta já está conectado no painel da Utmify
+  - Envia eventos pro Google/TikTok se conectados na Utmify
+
+  Resultado: tracking 10/10 sem precisar de Custom Pixel direto do Meta.
+
+  Onde está conectado:
+  - Meta Pixel: 1021030166620463 (configurado dentro da Utmify)
+{%- endcomment -%}
+<script>
+  window.pixelId = "6a230fe71c778d01f58ab301";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script>
