@@ -1,0 +1,46 @@
+{%- comment -%}
+  Organization + WebSite JSON-LD (home only) for search engines and AI answers.
+{%- endcomment -%}
+{%- if template.name == 'index' -%}
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "OnlineStore",
+        "@id": {{ shop.url | append: '/#organization' | json }},
+        "name": {{ shop.name | json }},
+        "url": {{ shop.url | json }},
+        {%- if settings.logo != blank %}
+        "logo": {{ settings.logo | image_url: width: 600 | prepend: 'https:' | json }},
+        {%- endif %}
+        "description": "Loja de perfumes árabes, importados e de nicho originais, com nota fiscal. Também vende no TikTok Shop.",
+        "email": {{ shop.email | json }},
+        "telephone": "+55 13 99602-7442",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Cubatão",
+          "addressRegion": "SP",
+          "addressCountry": "BR"
+        },
+        "areaServed": "BR",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer service",
+          "telephone": "+55 13 99602-7442",
+          "email": {{ shop.email | json }},
+          "availableLanguage": "Portuguese"
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": {{ shop.url | append: '/#website' | json }},
+        "name": {{ shop.name | json }},
+        "url": {{ shop.url | json }},
+        "inLanguage": "pt-BR",
+        "publisher": { "@id": {{ shop.url | append: '/#organization' | json }} }
+      }
+    ]
+  }
+</script>
+{%- endif -%}
