@@ -103,7 +103,14 @@
                       render 'icon-accordion', icon: block.settings.icon
                       echo block.settings.text
                     else
-                      echo product.vendor | link_to_vendor : class: "reversed-link"
+                      # Brand collection (handle = handleized vendor) when it exists, else Shopify's vendor listing.
+                      assign brand_handle = product.vendor | handleize
+                      assign brand_collection = collections[brand_handle]
+                      if brand_collection.id
+                        echo product.vendor | link_to: brand_collection.url, class: 'reversed-link'
+                      else
+                        echo product.vendor | link_to_vendor : class: "reversed-link"
+                      endif
                     endif
                   -%}
                 </p>

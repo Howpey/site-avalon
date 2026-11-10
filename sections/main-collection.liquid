@@ -24,9 +24,14 @@
 
 <div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}">
   <div class="collection page-width{% if section.settings.full_width %} page-width--full{% endif %} relative{% if enable_filtering %} with-{{ filter_type }}{% endif %}">
-    {%- if description != blank and collection.description != blank -%}
+    {%- liquid
+      # Long descriptions: the intro (before the first <h2>) goes above the grid, the rest (guide, FAQ) below it.
+      assign description_intro = collection.description | split: '<h2' | first
+      assign description_more = collection.description | remove_first: description_intro
+    -%}
+    {%- if description != blank and description_intro != blank -%}
       <div class="rte collection__description" {{ description.shopify_attributes }}>
-        {{- collection.description -}}
+        {{- description_intro -}}
       </div>
     {%- endif -%}
 
@@ -207,6 +212,12 @@
         </div>
       </div>
     {%- endpaginate -%}
+
+    {%- if description != blank and description_more != blank and current_page == 1 -%}
+      <div class="rte collection__description collection__description--more">
+        {{- description_more -}}
+      </div>
+    {%- endif -%}
   </div>
 </div>
 
@@ -245,6 +256,9 @@
   "name": {{ collection.title | json }}
 }
 </script>
+{%- if current_page == 1 -%}
+  {%- render 'faq-schema', html: collection.description -%}
+{%- endif -%}
 
 {% schema %}
 {

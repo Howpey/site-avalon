@@ -8328,6 +8328,11 @@ details.active .drawer__promotions .mega-menu__item,
   margin-block-end: clamp(var(--sp-10), 2.526vw, var(--sp-12));
 }
 
+.collection__description--more {
+  margin-block: clamp(var(--sp-10), 2.526vw, var(--sp-12)) 0;
+  max-width: 80ch;
+}
+
 .facet-wrapper>.button,
 .sort-wrapper>.button {
   height: clamp(var(--sp-14), 3vw, var(--sp-15));
