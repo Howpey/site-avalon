@@ -24,6 +24,15 @@
           "addressCountry": "BR"
         },
         "areaServed": "BR",
+        "hasMerchantReturnPolicy": {
+          "@type": "MerchantReturnPolicy",
+          "applicableCountry": "BR",
+          "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+          "merchantReturnDays": 7,
+          "returnFees": "https://schema.org/FreeReturn",
+          "returnMethod": "https://schema.org/ReturnByMail",
+          "merchantReturnLink": {{ shop.url | append: '/policies/refund-policy' | json }}
+        },
         "contactPoint": {
           "@type": "ContactPoint",
           "contactType": "customer service",

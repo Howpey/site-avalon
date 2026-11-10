@@ -1,0 +1,41 @@
+{%- comment -%}
+  FAQPage JSON-LD built from a "Perguntas frequentes" block inside rich text.
+  Expects: <hN>Perguntas frequentes</hN> then pairs of <hN+1>question</hN+1><p>answer</p>.
+  Stops at the next <hN>, so sections after the FAQ are not read as questions.
+
+  Usage: {% render 'faq-schema', html: product.description %}
+{%- endcomment -%}
+{%- liquid
+  assign faq_parts = html | split: 'Perguntas frequentes</h'
+  assign faq_items = ''
+  if faq_parts.size > 1
+    assign faq_tail = faq_parts | last
+    assign faq_level = faq_tail | slice: 0
+    assign faq_q_level = faq_level | plus: 1
+    assign faq_open = '<h' | append: faq_q_level | append: '>'
+    assign faq_close = '</h' | append: faq_q_level | append: '>'
+    assign faq_stop = '<h' | append: faq_level
+    assign faq_items = faq_tail | split: faq_stop | first | split: faq_open
+  endif
+-%}
+{%- if faq_items.size > 1 -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {%- for faq_item in faq_items offset: 1 -%}
+          {%- assign faq_qa = faq_item | split: faq_close -%}
+          {
+            "@type": "Question",
+            "name": {{ faq_qa.first | strip_html | strip | json }},
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": {{ faq_qa.last | split: '</p>' | first | strip_html | strip | json }}
+            }
+          }{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      ]
+    }
+  </script>
+{%- endif -%}

@@ -58,8 +58,8 @@
       {%- capture mobile_style -%}max-height: {{ lhm }}px;max-width: {{ lwm }}px;height: auto;width: auto;{%- endcapture -%}
 
       {%- liquid
-        echo logo | image_url: width: src_w | image_tag: loading: 'lazy', widths: widths, sizes: sizes, style: style, preload: true, itemprop: 'logo', is: 'lazy-image', class: 'logo hidden md:block'
-        echo logo_mobile | image_url: width: src_wm | image_tag: loading: 'lazy', widths: mobile_widths, sizes: mobile_sizes, style: mobile_style, preload: true, itemprop: 'logo', is: 'lazy-image', class: 'logo md:hidden'
+        echo logo | image_url: width: src_w | image_tag: alt: shop.name, loading: 'lazy', widths: widths, sizes: sizes, style: style, preload: true, itemprop: 'logo', is: 'lazy-image', class: 'logo hidden md:block'
+        echo logo_mobile | image_url: width: src_wm | image_tag: alt: shop.name, loading: 'lazy', widths: mobile_widths, sizes: mobile_sizes, style: mobile_style, preload: true, itemprop: 'logo', is: 'lazy-image', class: 'logo md:hidden'
       -%}
 
       {%- if white_logo -%}
@@ -76,8 +76,8 @@
         {%- capture mobile_style -%}max-height: {{ lhm }}px;max-width: {{ wlwm }}px;height: auto;width: auto;{%- endcapture -%}
 
         {%- liquid
-          echo white_logo | image_url: width: src_w | image_tag: loading: 'lazy', widths: widths, sizes: sizes, style: style, preload: true, itemprop: 'logo', is: 'lazy-image', class: 'white-logo hidden md:block absolute'
-          echo white_logo_mobile | image_url: width: src_wm | image_tag: loading: 'lazy', widths: mobile_widths, sizes: mobile_sizes, style: mobile_style, preload: true, itemprop: 'logo', is: 'lazy-image', class: 'white-logo md:hidden absolute'
+          echo white_logo | image_url: width: src_w | image_tag: alt: shop.name, loading: 'lazy', widths: widths, sizes: sizes, style: style, preload: true, itemprop: 'logo', is: 'lazy-image', class: 'white-logo hidden md:block absolute'
+          echo white_logo_mobile | image_url: width: src_wm | image_tag: alt: shop.name, loading: 'lazy', widths: mobile_widths, sizes: mobile_sizes, style: mobile_style, preload: true, itemprop: 'logo', is: 'lazy-image', class: 'white-logo md:hidden absolute'
         -%}
       {%- endif -%}
     </a>

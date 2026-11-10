@@ -7,6 +7,10 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="{{ settings.color_button_background }}">
   <link rel="canonical" href="{{ canonical_url }}">
+  {%- comment -%} Thin or duplicate listings: internal search, tag-filtered lists, the "frontpage" helper collection. {%- endcomment -%}
+  {%- if template.name == 'search' or current_tags or template.name == 'collection' and collection.handle == 'frontpage' -%}
+    <meta name="robots" content="noindex, follow">
+  {%- endif %}
   <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
   <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
   {% # theme-check-disable RemoteAsset %}

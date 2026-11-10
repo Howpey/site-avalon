@@ -10659,7 +10659,8 @@ noscript .product-form__input {
     grid-template-columns: minmax(0, 1fr) auto;
   }
 
-  .product__title.with-price h1 {
+  .product__title.with-price h1,
+  .product__title.with-price h2 {
     grid-column: auto;
   }
 
